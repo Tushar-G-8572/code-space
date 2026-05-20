@@ -112,14 +112,17 @@ app.post('/create-files',async(req,res)=>{
  */
 
 app.patch('/update-files',async(req,res)=>{
- const updates = req.body.updates;
-
-    if (!updates || !Array.isArray(updates)) {
-        return res.status(400).json({
-            message: 'Invalid request body. Expected a JSON object with an "updates" property containing an array of file updates.',
-            status: 'error',
-        });
-    }
+    console.log('Content-Type received:', req.headers['content-type']);
+  console.log('req.body:', req.body);  // should NOT be undefined
+  
+  const updates = req.body?.updates;  // already there ✓
+  if (!updates || !Array.isArray(updates)) {
+    return res.status(400).json({
+      message: 'Invalid request body. Expected { updates: [...] }',
+      status: 'error',
+      received: req.body  // helpful for debugging
+    });
+  }
 
     const results = await Promise.all(updates.map(async (update) => {
         const { file, content } = update;
@@ -145,6 +148,7 @@ app.patch('/update-files',async(req,res)=>{
         results,
     });
 })
+
 
 /**
  * @route GET /read-files

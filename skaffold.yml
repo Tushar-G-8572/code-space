@@ -1,0 +1,2 @@
+apiVersion: skaffoldv11
+kind: Config
