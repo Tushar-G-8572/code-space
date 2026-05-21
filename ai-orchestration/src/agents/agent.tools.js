@@ -4,13 +4,13 @@ import * as z from 'zod';
 
 export const listFiles = tool(async ({ }, config) => {
   try {
-    console.log("List files Called")
-    console.log(config.context.projectId)
+    const writer = config.writer;
+    writer("List files read successfully.\n");
     const response = await axios.get(`http://sandbox-service-${config.context.projectId}:3000/list-files`)
-    console.log(response.data)
+    writer("Files listed successfully." + "Files: " + response.data.files.join(",") + "\n");
     return JSON.stringify(response.data.files);
   } catch (err) {
-    console.log(err);
+    console.log(err); 
     return JSON.stringify(err);
   }
 }, {
@@ -31,15 +31,17 @@ axios.interceptors.request.use((config) => {
 
 export const readFiles = tool(async ({ files }, config) => {
 
-  console.log("Read Files called");
+  const writer = config.writer;
+  writer("Reading files..." + files.join(",") + "\n");
+  
   const response = await axios.get(`http://sandbox-service-${config.context.projectId}:3000/read-files?files=${files.join(',')}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      }
-    })
-  console.log("response from read files tool", response.data)
+  {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }
+  })
+   writer("Files read successfully.\n");
   return JSON.stringify(response.data)
 
 }, {
@@ -64,9 +66,8 @@ axios.interceptors.request.use((config) => {
 export const updateFile = tool(async ({ files }, config) => {
 
   try {
-    console.log("Update files called");
-    console.log("files are", files);
-
+    const writer = config.writer;
+    writer("Updating files..." + files.map(f => f.file).join(",") + "\n");
     const response = await axios.patch(`http://sandbox-service-${config.context.projectId}:3000/update-files`,
       { updates: files },
       {
@@ -75,7 +76,7 @@ export const updateFile = tool(async ({ files }, config) => {
           "Accept": "application/json"
         }
       });
-    console.log(response.data);
+     writer("Update read successfully.\n");
 
     return JSON.stringify(response.data);
 
