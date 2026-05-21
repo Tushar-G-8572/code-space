@@ -1,11 +1,17 @@
 import express from 'express'
 import morgan from 'morgan'
-import router from './routes/router.route.js';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 
 const app = express();
 
-app.use('/api/router',router);
+app.get('/api/router/healthz',(req,res)=>{
+ res.status(200).json({success:'ok',message:"Router health"});
+})
+
+app.get('/api/router/readyz',(req,res)=>{
+ res.status(200).json({success:'ok',message:"Router readyz"});
+})
+
 
 let proxies = {};
 let agentProxy = {};
