@@ -3,6 +3,15 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: code-space-ingress
+  annotations:
+    # Time in seconds to wait for a response from the pod
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "6000"
+    
+    # Time in seconds to wait for data to be sent to the pod
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "6000"
+    
+    # Time in seconds to establish a connection to the pod
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "6000"
   labels:
     app.kubernetes.io/name: code-space-ingress
 spec:
@@ -17,6 +26,16 @@ spec:
             name: sandbox-service
             port:
               number: 80
+  - http:
+      paths:
+      - path: /api/ai
+        pathType: Prefix
+        backend:
+          service:
+            name: ai-service
+            port:
+              number: 80
+
   - host: "*.preview.localhost"
     http:
       paths:
@@ -27,6 +46,7 @@ spec:
             name: router-service
             port:
               number: 80
+
   - host: "*.agent.localhost"
     http:
       paths:

@@ -3,9 +3,10 @@ import { tool } from "langchain"
 import * as z from 'zod';
 import dns from "node:dns";
 import http from "node:http";
-const SANDBOX_ID = "019e45e4-d6c1-77fb-8f71-efd0194a64cf";
-const BASE_URL = `http://${SANDBOX_ID}.agent.localhost`;
-
+const SANDBOX_ID = "019e4915-c7be-7608-9a9b-cc3d32886f06";
+// const BASE_URL = `http://${SANDBOX_ID}.agent.localhost`;
+const BASE_URL = `http://sandbox-service-${SANDBOX_ID}:3000`
+// sandbox-service-019e48db-79c6-7124-8886-a5a819006173
 const httpAgent = new http.Agent({
  lookup: (hostname, options, callback) => {
   const cb = typeof options === "function" ? options : callback;
