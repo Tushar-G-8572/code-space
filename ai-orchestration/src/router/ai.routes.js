@@ -18,6 +18,7 @@ aiRouter.post('/invoke', async (req, res) => {
             'Cache-Control': 'no-cache',
             'Connection': 'keep-alive',
         });
+        const writer = (text) => res.write(text);
         const response = await agent.stream({
             messages: [
                 {
@@ -27,7 +28,8 @@ aiRouter.post('/invoke', async (req, res) => {
             ]
         }, {
             context: {
-                projectId: projectId
+                projectId: projectId,
+                writer: writer
             },
             streamMode: "custom"
         })
@@ -35,9 +37,14 @@ aiRouter.post('/invoke', async (req, res) => {
             console.log(chunk);
             res.write(`data:${chunk}\n\n`)
         }
-        res.json({ response });
+       return res.end(); 
+        // res.json({ response });
     } catch (err) {
         console.log("Error invoking Agent", err);
+        if (res.headersSent) { res.end(); }
+        else { res.status(500).json({ error: "Failed to invoke agent" });
+    }
+        res.end();
         return res.status(500).json({ message: "Error while invoking" })
     }
 })

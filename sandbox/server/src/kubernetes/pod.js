@@ -5,7 +5,6 @@ export async function createPod(sandboxId) {
    metadata:{
     name:`sandbox-pod-${sandboxId}`,
     labels:{
-     app:'sandbox',
      sandboxId:sandboxId
     }
    },
@@ -34,7 +33,7 @@ export async function createPod(sandboxId) {
      {
       image:"template",
       imagePullPolicy:"IfNotPresent",
-      name:"sandbox-deployment",
+      name:"sandbox-container",
       ports:[{containerPort:5173,name:"http"}],
       resources: {
                 requests: {cpu: "125m",memory: "250Mi"},
@@ -51,7 +50,7 @@ export async function createPod(sandboxId) {
       image:"agent",
       imagePullPolicy:"IfNotPresent",
       name:"agent-container",
-      ports:[{containerPort:3000,name:"http"}],
+      ports:[{containerPort:3000,name:"agent-http"}],
       resources: {
        limits: { cpu: "500m", memory: "1Gi" },
        requests: { cpu: "250m", memory: "500Mi" }
