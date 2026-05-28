@@ -15,7 +15,15 @@ sandboxRoute.post('/start', async (req, res) => {
   const sandboxId = uuid();
   await createPod(sandboxId);
   await createService(sandboxId);
-  return res.status(201).json({ success: true, sandboxId, previewUrl: `http://${sandboxId}.preview.localhost` });
+  // return res.status(201).json({ success: true, sandboxId,
+  //   previewUrl: `http://${sandboxId}.preview.localhost` });
+  return res.status(201).json({
+        success: true,
+        sandboxId,
+        // Change .localhost → .lvh.me
+        previewUrl: `http://${sandboxId}.preview.lvh.me`,
+        agentUrl: `http://${sandboxId}.agent.lvh.me`
+    });
  } catch (err) {
   console.log(err);
   return res.status(500).json({ message: "Sandbox creation error" });

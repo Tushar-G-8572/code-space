@@ -10,12 +10,13 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-send-timeout: "6000"
     # Time in seconds to establish a connection to the pod
     nginx.ingress.kubernetes.io/proxy-connect-timeout: "6000"
+    
     nginx.ingress.kubernetes.io/affinity: "cookie"
     nginx.ingress.kubernetes.io/session-cookie-name: "route"
     nginx.ingress.kubernetes.io/session-cookie-path: "/"
 
     nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
-    nginx.ingress.kubernetes.io/websocket-services: "router-service"
+    nginx.ingress.kubernetes.io/proxy-set-headers: "default/ws-configure"
     
   labels:
     app.kubernetes.io/name: code-space-ingress
@@ -51,7 +52,7 @@ spec:
             port:
               number: 80
 
-  - host: "*.preview.localhost"
+  - host: "*.preview.lvh.me"
     http:
       paths:
       - path: /
@@ -62,7 +63,7 @@ spec:
             port:
               number: 80
 
-  - host: "*.agent.localhost"
+  - host: "*.agent.lvh.me"
     http:
       paths:
       - path: /
