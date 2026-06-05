@@ -53,7 +53,7 @@ export default function PreviewFrame({ previewUrl }) {
         </button>
 
         {/* Open in new tab */}
-        <a href={previewUrl} target="_blank" rel="noreferrer"
+        <a href={"http://019e974c-1afa-751f-aaaf-9063b5a556ff.preview.localhost"} target="_blank" rel="noreferrer"
           className="p-1 rounded transition-colors cursor-pointer"
           style={{ color: '#475569' }}
           onMouseEnter={e => e.currentTarget.style.color = '#22d3ee'}

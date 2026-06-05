@@ -4,7 +4,7 @@ import * as z from 'zod';
 
 export const listFiles = tool(async ({ }, config) => {
   try {
-    const writer = config.writer;
+     const writer = config.context?.writer ?? (() => {});
     writer("List files read successfully.\n");
     const response = await axios.get(`http://sandbox-service-${config.context.projectId}:3000/list-files`)
     writer("Files listed successfully." + "Files: " + response.data.files.join(",") + "\n");
@@ -31,7 +31,7 @@ axios.interceptors.request.use((config) => {
 
 export const readFiles = tool(async ({ files }, config) => {
 
-  const writer = config.writer;
+   const writer = config.context?.writer ?? (() => {});
   writer("Reading files..." + files.join(",") + "\n");
   
   const response = await axios.get(`http://sandbox-service-${config.context.projectId}:3000/read-files?files=${files.join(',')}`,
@@ -66,7 +66,7 @@ axios.interceptors.request.use((config) => {
 export const updateFile = tool(async ({ files }, config) => {
 
   try {
-    const writer = config.writer;
+    const writer = config.context?.writer ?? (() => {});
     writer("Updating files..." + files.map(f => f.file).join(",") + "\n");
     const response = await axios.patch(`http://sandbox-service-${config.context.projectId}:3000/update-files`,
       { updates: files },

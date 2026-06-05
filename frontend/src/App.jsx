@@ -60,11 +60,14 @@ export default function App() {
   }
 
   // Landing / splash
-  if (!sandbox) {
-    return <SplashScreen onSandboxCreated={handleSandboxCreated} />
-  }
+  // if (!sandbox) {
+  //   return <SplashScreen onSandboxCreated={handleSandboxCreated} />
+  // }
 
-  const { sandboxId, previewUrl, agentBase } = sandbox
+  // const { sandboxId="019e966f-208e-735f-9348-16dcd9e507ae", previewUrl, agentBase } = sandbox
+  const sandboxId = "019e974c-1afa-751f-aaaf-9063b5a556ff";
+  const previewUrl = "http://019e974c-1afa-751f-aaaf-9063b5a556ff.preview.localhost"
+  const agentBase = "http://019e974c-1afa-751f-aaaf-9063b5a556ff.agent.localhost"
 
   return (
     <div className="flex flex-col h-full w-full overflow-hidden"

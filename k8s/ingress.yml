@@ -16,7 +16,7 @@ metadata:
     nginx.ingress.kubernetes.io/session-cookie-path: "/"
 
     nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
-    nginx.ingress.kubernetes.io/proxy-set-headers: "default/ws-configure"
+    nginx.ingress.kubernetes.io/websocket-services: "router-service"
     
   labels:
     app.kubernetes.io/name: code-space-ingress
@@ -52,7 +52,7 @@ spec:
             port:
               number: 80
 
-  - host: "*.preview.lvh.me"
+  - host: "*.preview.localhost"
     http:
       paths:
       - path: /
@@ -63,7 +63,7 @@ spec:
             port:
               number: 80
 
-  - host: "*.agent.lvh.me"
+  - host: "*.agent.localhost"
     http:
       paths:
       - path: /
@@ -72,4 +72,5 @@ spec:
           service:
             name: router-service
             port:
-              number: 80           
+              number: 80
+     
