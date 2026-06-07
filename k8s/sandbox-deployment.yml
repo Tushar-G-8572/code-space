@@ -32,6 +32,25 @@ spec:
             port: 3000
           initialDelaySeconds: 90
           timeoutSeconds: 10
+        env:
+          - name: REDIS_URL
+            valueFrom:
+              secretKeyRef:
+                name:  database
+                key:  REDIS_URL
+                
+          - name: SANDBOX_MONGO_URI
+            valueFrom:
+              secretKeyRef:
+                name:  database
+                key:  SANDBOX
+
+          - name: JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name:  jwt
+                key: JWT_SECRET
+
         readinessProbe:
           httpGet:
             path: /api/sandbox/healthz

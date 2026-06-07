@@ -44,7 +44,7 @@ export default function SplashScreen({ onSandboxCreated }) {
     setLoadingProjectId(projectId)
     setError(null)
     try {
-      const sandboxRes = await fetch('/api/sandbox/project', {
+      const sandboxRes = await fetch('/api/sandbox/start', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -71,7 +71,7 @@ export default function SplashScreen({ onSandboxCreated }) {
     try {
       // Step 1: Create the project
       setLoadingStep('project')
-      const projectRes = await fetch('/api/sandbox/start', {
+      const projectRes = await fetch('/api/sandbox/project', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

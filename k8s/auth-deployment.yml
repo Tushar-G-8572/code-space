@@ -44,6 +44,12 @@ spec:
               name: database
               key: AUTH  
 
+        - name: RABBITMQ_URL
+          valueFrom:
+            secretKeyRef:
+              name: database
+              key: RABBITMQ_URL  
+              
         - name:  GOOGLE_CLIENT_ID
           valueFrom:
             secretKeyRef:
@@ -55,6 +61,18 @@ spec:
             secretKeyRef:
               name:  google
               key:  GOOGLE_CLIENT_SECRET
+        
+        - name:  GOOGLE_REFRESH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name:  google
+              key:  GOOGLE_REFRESH_TOKEN
+
+        - name:  EMAIL_USER
+          valueFrom:
+            secretKeyRef:
+              name:  google
+              key:  EMAIL_USER
 
         - name:  JWT_SECRET
           valueFrom:

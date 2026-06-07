@@ -23,6 +23,7 @@ spec:
               secretKeyRef:
                 name:  ai-secret
                 key:  MISTRAL_API_KEY
+                
         name:  ai-server
         resources:
           requests:

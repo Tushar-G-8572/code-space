@@ -24,8 +24,21 @@ build:
         infer:
           - "src/**"
 
+    - image: notification
+      context: notification
+      docker:
+        dockerfile: dockerfile
+      sync:
+        infer:
+          - "src/**"
+
     - image: agent
       context: sandbox/agents
+      docker:
+        dockerfile: dockerfile
+    
+    - image: sync-agent
+      context: sandbox/sync-agent
       docker:
         dockerfile: dockerfile
     
@@ -58,3 +71,10 @@ manifests:
     - k8s/sandbox-service.yml
     - k8s/rbac.yml
     - k8s/ingress.yml
+    - k8s/secret-auth.yml
+    - k8s/secret-ai.yml
+    - k8s/secret-google.yml
+    - k8s/secret-jwt.yml
+    - k8s/secret-aws.yml
+    - k8s/notification-deployment.yml
+    - k8s/notification-service.yml

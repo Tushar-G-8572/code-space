@@ -70,8 +70,8 @@ export default function Terminal({ sandboxId }) {
   const connectSocket = useCallback((term) => {
     if (!sandboxId || !term) return
 
-    // const agentHost = `http://sandbox-service-${sandboxId}:3000`
-    const agentHost = "http://019e974c-1afa-751f-aaaf-9063b5a556ff.agent.localhost"
+    const agentHost = `http://sandbox-service-${sandboxId}:3000`
+    // const agentHost = `http://${sandboxId}.agent.localhost`
     try {
       const socket = io(agentHost, {
         transports: ['websocket', 'polling'],
