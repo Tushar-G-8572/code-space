@@ -21,11 +21,12 @@ channel.consume('auth_notification_queue', async (msg) => {
         console.log('Received message from queue:', messageContent);
 
         try {
-            const { userId, timestamp, email } = JSON.parse(messageContent);
+            console.log(JSON.parse(messageContent))
+            const { userId, timestamps, email } = JSON.parse(messageContent);
             
             const subject = 'New Login Notification';
-            const text = `A new login was detected for your account at ${timestamp}. If this was not you, please secure your account immediately.`;
-            const html = `<p>A new login was detected for your account at <strong>${timestamp}</strong>. If this was not you, please secure your account immediately.</p>`;
+            const text = `A new login was detected for your account at ${timestamps}. If this was not you, please secure your account immediately.`;
+            const html = `<p>A new login was detected for your account at <strong>${timestamps}</strong>. If this was not you, please secure your account immediately.</p>`;
 
             await sendEmail(email, subject, text, html);
             

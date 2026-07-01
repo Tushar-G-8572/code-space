@@ -8,10 +8,11 @@ export default defineConfig({
     host:'0.0.0.0',
     port:5173,
     allowedHosts:true,
-    hmr: {
-      clientPort: 80,
-      protocol: 'ws',
-    },
+    // hmr: {
+    //   clientPort: 80,
+    //   protocol: 'ws',
+    // },
+    hmr:false,
     watch: {
       usePolling: true,
       interval: 300,

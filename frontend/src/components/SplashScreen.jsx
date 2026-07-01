@@ -19,7 +19,7 @@ export default function SplashScreen({ onSandboxCreated }) {
         const res = await fetch('/api/sandbox/project', { credentials: 'include' })
         if (res.ok) {
           const data = await res.json()
-          setProjects(data.projects || [])
+          setProjects(data.project || [])
         }
       } catch {
         // Silently ignore — user may not be logged in yet

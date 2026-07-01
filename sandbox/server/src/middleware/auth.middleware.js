@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken'
 
 export async function authMiddleware(req,res,next) {
  const token = req.cookies?.token || req.headers[ 'authorization' ]?.split(' ')[ 1 ];
- console.log(token)
  try{
   if(!token){
    return res.status(403).json({success:false,message:"Unauthorised"});
