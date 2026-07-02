@@ -98,6 +98,9 @@ export default function SplashScreen({ onSandboxCreated }) {
       setLoadingStep('')
     }
   }
+  const handleSignIn = ()=>{
+    window.location.href = '/api/auth/google';
+  }
 
   const isAnyLoading = loading || loadingProjectId !== null
 
@@ -169,7 +172,7 @@ export default function SplashScreen({ onSandboxCreated }) {
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
             }}>
-            Sandbox IDE
+            Code Space IDE
           </h1>
           <p className="text-lg" style={{ color: '#64748b' }}>
             Spin up an isolated coding environment in seconds
@@ -189,6 +192,22 @@ export default function SplashScreen({ onSandboxCreated }) {
             </span>
           ))}
         </div>
+
+        <button
+          type="button"
+          className="mt-2  inline-flex items-center justify-center gap-3 w-full cursor-pointer max-w-xs rounded-2xl border border-slate-700 bg-slate-950/80 px-5 py-3 text-sm font-semibold text-slate-100 shadow-lg shadow-cyan-500/10 transition hover:border-cyan-400 hover:bg-slate-900/95 focus:outline-none focus:ring-2 focus:ring-cyan-300"
+          onClick={handleSignIn}
+        >
+          <span className="flex h-6 w-6 items-center justify-center rounded-full  bg-white">
+            <svg viewBox="0 0 24 24" className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M22.5 12.24c0-.78-.07-1.53-.2-2.26H12v4.26h6.12c-.26 1.4-1.02 2.58-2.18 3.37v2.81h3.53c2.06-1.9 3.24-4.7 3.24-8.18Z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.67l-3.53-2.81c-.98.66-2.24 1.05-3.75 1.05-2.88 0-5.33-1.95-6.2-4.59H1.97v2.88C3.76 20.98 7.62 23 12 23Z" fill="#34A853"/>
+              <path d="M5.79 14.98a7.41 7.41 0 0 1 0-4.96V7.14H1.97a11.99 11.99 0 0 0 0 9.72l3.82-2.88Z" fill="#FBBC05"/>
+              <path d="M12 4.5c1.62 0 3.08.56 4.23 1.66l3.17-3.17C17.44 1.2 14.97 0 12 0 7.62 0 3.76 2.02 1.97 5.14l3.82 2.88C6.67 6.45 9.12 4.5 12 4.5Z" fill="#EA4335"/>
+            </svg>
+          </span>
+          <span>Continue with Google</span>
+        </button>
 
         {/* Existing projects list */}
         {!isAnyLoading && (
@@ -296,10 +315,6 @@ export default function SplashScreen({ onSandboxCreated }) {
               onMouseLeave={e => e.currentTarget.style.boxShadow = '0 0 30px rgba(34,211,238,0.3), 0 4px 20px rgba(0,0,0,0.3)'}
             >
               <span className="flex items-center justify-center gap-2">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <line x1="12" y1="5" x2="12" y2="19" />
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                </svg>
                 Create New Project
               </span>
             </button>
