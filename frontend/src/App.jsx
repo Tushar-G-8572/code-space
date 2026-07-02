@@ -6,6 +6,7 @@ import PreviewFrame from './components/PreviewFrame'
 import FileViewer from './components/FileViewer'
 import Terminal from './components/Terminal'
 import AiChat from './components/AiChat'
+import CodeEditor from './components/CodeEditor'
 
 export default function App() {
   // Sandbox state
@@ -101,7 +102,8 @@ export default function App() {
             {activeTab === 'preview' ? (
               <PreviewFrame previewUrl={previewUrl} />
             ) : (
-              <FileViewer agentBase={agentBase} filePath={activeFile} />
+              // <FileViewer agentBase={agentBase} filePath={activeFile} />
+              <CodeEditor agentBase={agentBase} filePath={activeFile} />
             )}
           </div>
 

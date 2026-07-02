@@ -7,6 +7,7 @@ export default function SplashScreen({ onSandboxCreated }) {
   const [ dots, setDots ] = useState('')
   const [ title, setTitle ] = useState('')
   const [ loadingStep, setLoadingStep ] = useState('') // 'project' | 'sandbox'
+  const [user,setUser] = useState(false);
 
   // Existing projects
   const [ projects, setProjects ] = useState([])
@@ -20,8 +21,10 @@ export default function SplashScreen({ onSandboxCreated }) {
         if (res.ok) {
           const data = await res.json()
           setProjects(data.project || [])
+          setUser(data.id)
         }
-      } catch {
+      } catch(err) {
+        // setProjects([]);
         // Silently ignore — user may not be logged in yet
       } finally {
         setProjectsLoading(false)
@@ -44,7 +47,7 @@ export default function SplashScreen({ onSandboxCreated }) {
     setLoadingProjectId(projectId)
     setError(null)
     try {
-      const sandboxRes = await fetch('/api/sandbox/start', {
+      const sandboxRes = await fetch('/api/sandbox/open-project', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -98,6 +101,7 @@ export default function SplashScreen({ onSandboxCreated }) {
       setLoadingStep('')
     }
   }
+
   const handleSignIn = ()=>{
     window.location.href = '/api/auth/google';
   }
@@ -193,7 +197,8 @@ export default function SplashScreen({ onSandboxCreated }) {
           ))}
         </div>
 
-        <button
+        {!user && (
+          <button
           type="button"
           className="mt-2  inline-flex items-center justify-center gap-3 w-full cursor-pointer max-w-xs rounded-2xl border border-slate-700 bg-slate-950/80 px-5 py-3 text-sm font-semibold text-slate-100 shadow-lg shadow-cyan-500/10 transition hover:border-cyan-400 hover:bg-slate-900/95 focus:outline-none focus:ring-2 focus:ring-cyan-300"
           onClick={handleSignIn}
@@ -208,6 +213,7 @@ export default function SplashScreen({ onSandboxCreated }) {
           </span>
           <span>Continue with Google</span>
         </button>
+        )}
 
         {/* Existing projects list */}
         {!isAnyLoading && (
