@@ -32,6 +32,17 @@ spec:
             name: sandbox-service
             port:
               number: 80
+  
+  - http:
+      paths:
+      - path: "/api/github"
+        pathType: Prefix
+        backend:
+          service:
+            name: github-service
+            port:
+              number: 80
+
   - http:
       paths:
       - path: "/api/ai"

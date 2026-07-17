@@ -11,10 +11,6 @@ app.use(morgan('dev'));
 
 app.use(passport.initialize());
 
-app.get('/health',(req,res)=>{
- res.status(200).json({message:"OK"})
-})
-
 app.use('/api/github',githubRouter);
 
 export default app

@@ -6,6 +6,6 @@ import { connectDB } from "./src/config/db.config.js";
 connectDB();
 configPassport();
 
-app.listen(config.PORT,()=>{
- console.log(`server is running on port ${config.PORT}`);
+app.listen(3000,()=>{
+ console.log(`server is running on port 3000`);
 })

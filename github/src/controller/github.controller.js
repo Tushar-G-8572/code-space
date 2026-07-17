@@ -33,7 +33,9 @@ export async function githubCallback(req, res) {
 
 export async function getAllRepo(req,res) {
 
- const user = await githubUserModel.findOne({githubId:'178663251'})
+ const githubId = req.user.id;
+ console.log(githubId);
+ const user = await githubUserModel.findById({_id:githubId});
 
  try{
   const response = await fetch( "https://api.github.com/user/repos?visibility=public&sort=updated&per_page=100",{
@@ -44,7 +46,7 @@ export async function getAllRepo(req,res) {
   })
 
   const repos = await response.json()
-  
+
     const simplified = repos.map((r) => ({
       id: r.id,
       name: r.name,
