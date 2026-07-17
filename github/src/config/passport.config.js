@@ -8,6 +8,13 @@ export default function configPassport(){
  clientSecret:process.env.GITHUB_CLIENT_SECRET,
  callbackURL:"http://localhost:3000/api/github/signin/callback"
 },(accesstoken,refreshtoken,profile,done)=>{
- return done(null,profile);
+ const user = {
+      githubId: profile.id,
+      username: profile.username,
+      displayName: profile.displayName,
+      avatar: profile.photos?.[0]?.value,
+      accesstoken 
+    };
+ return done(null,user);
 }))
 }
